@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milk and Body Weight Calculator</title>
+    <style>
+      input {
+        margin: 5px;
+        padding: 10px;
+        width: 200px;
+      }
+
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      table {
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+
+    </style>
+    <script>
+      function calculate() {
+        const milkPerDay = parseFloat(document.getElementById('milkPerDay').value);
+        const bodyWeight = parseFloat(document.getElementById('bodyWeight').value);
+
+        if (isNaN(milkPerDay) || isNaN(bodyWeight)) {
+          alert('Please enter valid numbers for both inputs.');
+          return;
+        }
+        // Example calculation (you should replace this with the actual logic)
+        const calculateDMI = 3 + Math.ceil((milkPerDay / 5 - 4)) * 0.5;
+        const DMI = Math.max(2, calculateDMI);
+        const dmiKG = bodyWeight * DMI / 100;
+        const concFeed = dmiKG * 0.4;
+        const fooder = dmiKG * 0.6;
+        const dryFooder = fooder * 0.5;
+        const greenFooder = fooder * 0.5;
+        document.getElementById('dryFooder').textContent = dryFooder * 100 / 90;
+        document.getElementById('greenFooder').textContent = greenFooder * 100 / 20;
+        document.getElementById('cakes').textContent = concFeed * 100 * 33 / (90 * 100);
+        document.getElementById('chunni').textContent = concFeed * 100 * 33 / (90 * 100);
+        document.getElementById('grains').textContent = concFeed * 100 * 33 / (90 * 100);
+        document.getElementById('salt').textContent = concFeed * 100 / (90 * 100);
+        document.getElementById('total').textContent = (dryFooder * 100 / 90) + (greenFooder * 100 / 20) + (concFeed * 100 / (90));
+        document.getElementById('resultTable').style.display = 'table';
+
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <h1>Milk and Body Weight Calculator</h1>
+    <label for="milkPerDay">Milk per day:</label>
+    <input type="number" id="milkPerDay" name="milkPerDay" step="0.1"><br><br>
+
+    <label for="bodyWeight">Body Weight (BW):</label>
+    <input type="number" id="bodyWeight" name="bodyWeight" step="0.1"><br><br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <table id="resultTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Fooder Type</th>
+          <th>Weight with Mositure (Kg)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="cellInput1">Dry Fooder</td>
+          <td id="dryFooder">3</td>
+        </tr>
+        <tr>
+          <td id="cellInput1">Green Fooder</td>
+          <td id="greenFooder">3</td>
+        </tr>
+        <tr>
+          <td id="cellInput1">Cakes(P)</td>
+          <td id="cakes">3</td>
+        </tr>
+        <tr>
+          <td id="cellInput1">Chunni(P+E)</td>
+          <td id="chunni">3</td>
+        </tr>
+        <tr>
+          <td id="cellInput1">Grains(E)</td>
+          <td id="grains">3</td>
+        </tr>
+        <tr>
+          <td id="cellInput1">Salt/ MM</td>
+          <td id="salt">3</td>
+        </tr>
+        <tr>
+          <td id="cellInput1">Total</td>
+          <td id="total">3</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </body>
+
+</html>
